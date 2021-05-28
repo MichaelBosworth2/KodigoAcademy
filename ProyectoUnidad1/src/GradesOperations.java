@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GradesOperations {
-    private final Map<String, Integer> studentList = new HashMap<>();   // Creates an instance of Map class to hold name (key) and grade (value)
+    private final Map<String, Integer> studentList = new HashMap<>();   // Creates an instance of Map class to hold name (key) and grade (value).
     private final Scanner scanner = new Scanner(System.in);
 
     /* Creates a new text file */
@@ -50,7 +50,7 @@ public class GradesOperations {
     /* Appends a string to the file without writing over the data */
     public void writeOnFile(String result) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("StudentScores.txt", true));  // By making appending true, we can add data to file safely
+            BufferedWriter bw = new BufferedWriter(new FileWriter("StudentScores.txt", true));  // By making appending true, we can add data to file safely.
             bw.append(result);
             bw.newLine();
             bw.close();
