@@ -1,3 +1,5 @@
+import com.aspose.words.Document;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -23,11 +25,12 @@ public class Menu {
             System.out.println(activeSub);
             System.out.println(intro);
             option = scan.next();
+
             switch (option) {
                 case "0":
                     break label;
                 case "1":
-                    subPrompt();
+                    subjectPrompt();
                     break;
                 case "2":
                     addPrompt();
@@ -43,7 +46,7 @@ public class Menu {
         }
     }
 
-    private void subPrompt() {
+    private void subjectPrompt() {
         String option;
         String select = """
                 
