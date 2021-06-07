@@ -17,7 +17,7 @@ public class Subject {
 
     public void loadFile() {
         try {
-            Scanner scan = new Scanner(new FileReader("studentList.txt"));
+            Scanner scan = new Scanner(new FileReader("src/main/resources/studentList.txt"));
             while (scan.hasNext()) {
                 Student tempStu = new Student(scan.next(), scan.nextInt());
                 addStudent(tempStu);
@@ -30,8 +30,9 @@ public class Subject {
     public void addStudent(Student student) {
         StringBuilder sb = new StringBuilder();
         sb.append(student.getName()).append(" was successfully added to the ").append(subject).append(".txt file");
+        String file = "src/main/resources/" + subject + ".txt";
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(subject + ".txt", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
             bw.append(student.getName()).append(" ").append(String.valueOf(student.getGrade()));
             bw.newLine();
             bw.close();
