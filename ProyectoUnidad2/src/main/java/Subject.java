@@ -60,30 +60,27 @@ public class Subject {
 
     /* Generates the statistics for all subjects and appends it to the report.txt file */
     public void getStats() {
+        StringBuilder sb;
+        ArrayList<Student> studentList = new ArrayList<>();
+        String[] subjects = {"MATH", "HISTORY", "GRAMMAR"};
         createFile();
-        ArrayList<Student> tempList = new ArrayList<>();
-        String[] tempSub = {"MATH", "HISTORY", "GRAMMAR"};
         try {
-            for (String sub : tempSub) {
-                Scanner scan = new Scanner(new FileReader("src/main/resources/" + sub + ".txt"));
-                BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
-                bw.newLine();
-                bw.append(sub).append(" STATISTICS");
-                bw.newLine();
+            for (String subject : subjects) {
+                Scanner scan = new Scanner(new FileReader("src/main/resources/" + subject + ".txt"));
+                sb = new StringBuilder();
+                sb.append("\n").append("=================================\n").append(subject).append(" STATISTICS\n").append("=================================\n");
                 while (scan.hasNext()) {
-                    Student tempStu = new Student(scan.next(), scan.nextInt());
-                    bw.append(tempStu.getName()).append(" ").append(String.valueOf(tempStu.getGrade()));
-                    bw.newLine();
-                    tempList.add(tempStu);
+                    Student student = new Student(scan.next(), scan.nextInt());
+                    sb.append(student.getName()).append(" ").append(student.getGrade()).append("\n");
+                    studentList.add(student);
                 }
-                bw.append("===================================");
-                bw.newLine();
-                bw.close();
-                getMin(tempList);
-                getMax(tempList);
-                getAvg(tempList);
-                getPopular(tempList);
-                tempList.clear();
+                sb.append("\n").append("-----------------------------------").append("\n");
+                writeOnFile(sb.toString());
+                getMin(studentList);
+                getMax(studentList);
+                getAvg(studentList);
+                getPopular(studentList);
+                studentList.clear();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,7 +122,6 @@ public class Subject {
         }
         gradeAvg = gradeSum / count;
         message = "Average grade is: " + gradeAvg;
-        System.out.println(message);
         writeOnFile(message);
     }
 
@@ -149,7 +145,6 @@ public class Subject {
                 }
             }
         }
-        System.out.println("The most popular grade is: " + popular + " and is repeated " + count + " time(s).");
         getRepeated(studentList, popular, "Popular");
     }
 
@@ -163,10 +158,8 @@ public class Subject {
             }
         }
         message = target + " grade is " + grade + ". And it was the score of " + names.size() + " students: ";
-        System.out.println(message);
         writeOnFile(message);
         for (String n : names) {
-            System.out.println(n);
             writeOnFile(n);
         }
     }

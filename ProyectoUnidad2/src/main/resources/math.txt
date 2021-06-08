@@ -8,14 +8,3 @@ Pepe 5
 Mario 5
 Michelle 7
 Brenda 2
-Mike 10
-George 1
-Marcy 10
-Rose 5
-Charles 1
-Carlos 8
-Pepe 5
-Mario 5
-Michelle 7
-Brenda 2
-Analista 9
