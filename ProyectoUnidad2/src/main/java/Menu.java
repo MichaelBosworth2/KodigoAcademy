@@ -20,7 +20,7 @@ public class Menu {
                 1: Load File (Subject).\s
                 2: Add Student.\s
                 3: Generate and Send Reports.\s
-                0: Return.""";
+                0: Exit.""";
         label:
         while (true) {
             String activeSub = "\nSelected Subject: " + subject.toUpperCase();
