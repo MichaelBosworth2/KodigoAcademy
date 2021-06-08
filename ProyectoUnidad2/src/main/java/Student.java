@@ -1,22 +1,15 @@
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.*;
 import java.util.Scanner;
 
-@Data @AllArgsConstructor
+@Data @AllArgsConstructor @Getter
 public class Student {
 
     private final String name;
-    private final int grade;
-
-    public String getName() {
-        return name;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
+    private final double grade;
 
     /* Add student to file */
     public void addStudent(String subject) {

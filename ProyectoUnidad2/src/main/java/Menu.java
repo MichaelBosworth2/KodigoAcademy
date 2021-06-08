@@ -10,6 +10,7 @@ public class Menu {
     private Student temp;
     private String subject = "No file selected";
 
+    /* Main Menu */
     public void mainMenu() {
         String option;
         String intro = """
@@ -119,12 +120,12 @@ public class Menu {
     /* Student input */
     private void studentPrompt(Subject subject) {
         String name;
-        int grade;
+        double grade;
 
         System.out.println("Please provide the student's name");
         name = scan.next();
         System.out.println("Provide " + name +"'s grade");
-        grade = scan.nextInt();
+        grade = scan.nextDouble();
         if (!(grade < 0 || grade > 10)) {
             temp = new Student(name, grade);
             temp.addStudent(subject.getSubject());

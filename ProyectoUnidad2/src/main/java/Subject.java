@@ -70,7 +70,7 @@ public class Subject {
                 sb = new StringBuilder();
                 sb.append("\n").append("=================================\n").append(subject).append(" STATISTICS\n").append("=================================\n");
                 while (scan.hasNext()) {
-                    Student student = new Student(scan.next(), scan.nextInt());
+                    Student student = new Student(scan.next(), scan.nextDouble());
                     sb.append(student.getName()).append(" ").append(student.getGrade()).append("\n");
                     studentList.add(student);
                 }
@@ -78,8 +78,8 @@ public class Subject {
                 writeOnFile(sb.toString());
                 getMin(studentList);
                 getMax(studentList);
-                getAvg(studentList);
                 getPopular(studentList);
+                getAvg(studentList);
                 studentList.clear();
             }
         } catch (IOException e) {
@@ -89,7 +89,7 @@ public class Subject {
 
     /* Get minimum grade from a list of Student */
     private void getMin(List<Student> studentList) {
-        int minGrade = 10;
+        double minGrade = 10;
         for (Student student : studentList) {
             if (minGrade > student.getGrade()) {
                 minGrade = student.getGrade();
@@ -100,7 +100,7 @@ public class Subject {
 
     /* Get maximum grade from a list of Student */
     private void getMax(List<Student> studentList) {
-        int maxGrade = 0;
+        double maxGrade = 0;
         for (Student student : studentList) {
             if (maxGrade < student.getGrade()) {
                 maxGrade = student.getGrade();
@@ -129,8 +129,8 @@ public class Subject {
     private void getPopular(List<Student> studentList) {
         int count = 0;
         int tempCount;
-        int popular = studentList.get(0).getGrade();
-        int temp;
+        double popular = studentList.get(0).getGrade();
+        double temp;
 
         for (int i = 0; i < studentList.size(); i++) {
             temp = studentList.get(i).getGrade();
@@ -149,7 +149,7 @@ public class Subject {
     }
 
     /* Iterate over a list of Student and finds all students with the grade set as parameter */
-    private void getRepeated(List<Student> list, int grade, String target) {
+    private void getRepeated(List<Student> list, double grade, String target) {
         ArrayList<String> names = new ArrayList<>();
         String message;
         for (Student n : list) {
