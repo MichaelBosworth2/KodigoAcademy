@@ -46,7 +46,7 @@ public class EmailUtil {
             String filename = "src/main/resources/Report.txt";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
+            messageBodyPart.setFileName("Report.txt");
             multipart.addBodyPart(messageBodyPart);
 
             // Third part is attachment
@@ -54,7 +54,7 @@ public class EmailUtil {
             String filename2 = "src/main/resources/Report.pdf";
             DataSource source2 = new FileDataSource(filename2);
             messageBodyPart.setDataHandler(new DataHandler(source2));
-            messageBodyPart.setFileName(filename2);
+            messageBodyPart.setFileName("Report.pdf");
             multipart.addBodyPart(messageBodyPart);
 
             // Send the complete message parts
@@ -62,7 +62,7 @@ public class EmailUtil {
 
             // Send message
             Transport.send(msg);
-            System.out.println("Email Sent successfully with attachment!!");
+            System.out.println("Email Sent successfully with attachments!!");
         }catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,7 @@ public class EmailUtil {
 
     public void Email(Subject subject) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/math.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Report.txt"));
             final String fromEmail = br.readLine(); //requires valid gmail id
             final String password = "password"; // correct password for gmail id
             final String toEmail = "emailAddress"; // can be any email id
@@ -91,7 +91,7 @@ public class EmailUtil {
             };
             Session session = Session.getInstance(props, auth);
 
-            EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", "TLSEmail Testing Body");
+            EmailUtil.sendEmail(session, toEmail,"Students' Report", "Copy of the students' report and statistics.");
         } catch (IOException e) {
             e.printStackTrace();
         }
