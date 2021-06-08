@@ -49,7 +49,7 @@ public class EmailUtil {
             messageBodyPart.setFileName("Report.txt");
             multipart.addBodyPart(messageBodyPart);
 
-            // Third part is attachment
+            // Third part is another attachment
             messageBodyPart = new MimeBodyPart();
             String filename2 = "src/main/resources/Report.pdf";
             DataSource source2 = new FileDataSource(filename2);

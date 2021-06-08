@@ -1,15 +1,14 @@
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.io.*;
 import java.util.Scanner;
 
+@Data @AllArgsConstructor
 public class Student {
 
     private final String name;
     private final int grade;
-
-    public Student(String name, int grade) {
-        this.name = name;
-        this.grade = grade;
-    }
 
     public String getName() {
         return name;
@@ -19,6 +18,7 @@ public class Student {
         return grade;
     }
 
+    /* Add student to file */
     public void addStudent(String subject) {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append(" was successfully added to the ").append(subject).append(".txt file");
@@ -35,6 +35,7 @@ public class Student {
         }
     }
 
+    /* Read data from a file to be added to the subject file */
     public void addStudentFile(String subject) {
         Student student;
         try {

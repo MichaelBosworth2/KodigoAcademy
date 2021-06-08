@@ -1,23 +1,20 @@
 import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Data @AllArgsConstructor @Getter
 public class Subject {
 
     private final String subject;
 
-    public Subject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
+    /* Checks if subject file is created, if it is not, it created it */
     public void loadFile() {
         String target = subject + ".txt";
         File file = new File("src/main/resources/" + target);
@@ -32,6 +29,7 @@ public class Subject {
         }
     }
 
+    /* Generates a report.txt file, and adds the email address to the first line */
     public void createFile() {
         try {
             File file = new File("src/main/resources/Report.txt");
@@ -47,6 +45,7 @@ public class Subject {
         }
     }
 
+    /* Appends a string to the report.txt file */
     public void writeOnFile(String result) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
@@ -59,6 +58,7 @@ public class Subject {
         }
     }
 
+    /* Generates the statistics for all subjects and appends it to the report.txt file */
     public void getStats() {
         createFile();
         ArrayList<Student> tempList = new ArrayList<>();
@@ -83,7 +83,6 @@ public class Subject {
                 getMax(tempList);
                 getAvg(tempList);
                 getPopular(tempList);
-
                 tempList.clear();
             }
         } catch (IOException e) {
@@ -91,6 +90,7 @@ public class Subject {
         }
     }
 
+    /* Get minimum grade from a list of Student */
     private void getMin(List<Student> studentList) {
         int minGrade = 10;
         for (Student student : studentList) {
@@ -101,6 +101,7 @@ public class Subject {
         getRepeated(studentList, minGrade, "Min");
     }
 
+    /* Get maximum grade from a list of Student */
     private void getMax(List<Student> studentList) {
         int maxGrade = 0;
         for (Student student : studentList) {
@@ -111,6 +112,7 @@ public class Subject {
         getRepeated(studentList, maxGrade, "Max");
     }
 
+    /* Get average grade from a list of Student */
     private void getAvg(List<Student> studentList) {
         double gradeSum = 0.0;
         double gradeAvg;
@@ -127,6 +129,7 @@ public class Subject {
         writeOnFile(message);
     }
 
+    /* Get most popular grade from a list of Student */
     private void getPopular(List<Student> studentList) {
         int count = 0;
         int tempCount;
@@ -150,6 +153,7 @@ public class Subject {
         getRepeated(studentList, popular, "Popular");
     }
 
+    /* Iterate over a list of Student and finds all students with the grade set as parameter */
     private void getRepeated(List<Student> list, int grade, String target) {
         ArrayList<String> names = new ArrayList<>();
         String message;
@@ -167,6 +171,7 @@ public class Subject {
         }
     }
 
+    /* Generate PDF file */
     public void getPdf() {
         Document document;
         try {

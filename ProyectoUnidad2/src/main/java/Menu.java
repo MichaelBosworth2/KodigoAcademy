@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+/* Class with multiple menus */
 public class Menu {
     private final Scanner scan = new Scanner(System.in);
     private final Subject math = new Subject("math");
@@ -17,7 +18,8 @@ public class Menu {
                 --------------------------------------------------------------\s
                 1: Load File (Subject).\s
                 2: Add Student.\s
-                3: Generate and Send Reports.""";
+                3: Generate and Send Reports.\s
+                0: Return.""";
         label:
         while (true) {
             String activeSub = "\nSelected Subject: " + subject.toUpperCase();
@@ -35,7 +37,6 @@ public class Menu {
                     addPrompt();
                     break;
                 case "3":
-
                     if (subOpt==null) {
                         System.out.println("No file has been selected yet!");
                     } else {
@@ -49,6 +50,7 @@ public class Menu {
         }
     }
 
+    /* Subject selection menu */
     private void subjectPrompt() {
         String option;
         String select = """
@@ -56,7 +58,8 @@ public class Menu {
                 Select the subject you would like to load.\s
                 1: Math.\s
                 2: History.\s
-                3: Grammar.""";
+                3: Grammar.\s
+                0: Return""";
         System.out.println(select);
         option = scan.next();
         switch (option) {
@@ -78,13 +81,15 @@ public class Menu {
         }
     }
 
+    /* Adding Student Menu */
     private void addPrompt() {
         String option;
         String select = """
                 
                 Select your method of input.\s
                 1: Keyboard\s
-                2: File Read""";
+                2: File Read\s
+                0: Return.""";
         label:
         while (true) {
             System.out.println(select);
@@ -111,6 +116,7 @@ public class Menu {
         }
     }
 
+    /* Student input */
     private void studentPrompt(Subject subject) {
         String name;
         int grade;
