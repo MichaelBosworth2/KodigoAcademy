@@ -6,7 +6,7 @@ public class Menu {
     private final Subject math = new Subject("math");
     private final Subject history = new Subject("history");
     private final Subject grammar = new Subject("grammar");
-    private Subject subOpt;
+    private Subject subjectHolder;
     private Student temp;
     private String subject = "No file selected";
 
@@ -38,13 +38,13 @@ public class Menu {
                     addPrompt();
                     break;
                 case "3":
-                    if (subOpt==null) {
+                    if (subjectHolder ==null) {
                         System.out.println("No file has been selected yet!");
                     } else {
-                        subOpt.getStats();
-                        subOpt.getPdf();
+                        subjectHolder.getStats();
+                        subjectHolder.getPdf();
                         EmailUtil eu = new EmailUtil();
-                        eu.Email();
+                        eu.email();
                     }
                     break;
             }
@@ -65,18 +65,18 @@ public class Menu {
         option = scan.next();
         switch (option) {
             case "1" -> {
-                subOpt = math;
-                subOpt.loadFile();
+                subjectHolder = math;
+                subjectHolder.loadFile();
                 subject = math.getSubject();
             }
             case "2" -> {
-                subOpt = history;
-                subOpt.loadFile();
+                subjectHolder = history;
+                subjectHolder.loadFile();
                 subject = history.getSubject();
             }
             case "3" -> {
-                subOpt = grammar;
-                subOpt.loadFile();
+                subjectHolder = grammar;
+                subjectHolder.loadFile();
                 subject = grammar.getSubject();
             }
         }
@@ -99,18 +99,18 @@ public class Menu {
                 case "0":
                     break label;
                 case "1":
-                    if (subOpt==null) {
+                    if (subjectHolder ==null) {
                         System.out.println("No subject has been selected yet!");
                     } else {
-                        studentPrompt(subOpt);
+                        studentPrompt(subjectHolder);
                     }
                     break label;
                 case "2":
-                    if (subOpt==null) {
+                    if (subjectHolder ==null) {
                         System.out.println("No subject has been selected yet!");
                     } else {
                         temp = new Student("temp", 1);
-                        temp.addStudentFile(subOpt.getSubject());
+                        temp.addStudentFile(subjectHolder.getSubject());
                     }
                     break label;
             }

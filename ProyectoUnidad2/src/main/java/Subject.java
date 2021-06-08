@@ -30,7 +30,7 @@ public class Subject {
     }
 
     /* Generates a report.txt file, and adds the email address to the first line */
-    public void createFile() {
+    private void createFile() {
         try {
             File file = new File("src/main/resources/Report.txt");
             BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
@@ -46,7 +46,7 @@ public class Subject {
     }
 
     /* Appends a string to the report.txt file */
-    public void writeOnFile(String result) {
+    private void writeOnFile(String result) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
             bw.append(result);
@@ -174,5 +174,4 @@ public class Subject {
             e.printStackTrace();
         }
     }
-
 }
