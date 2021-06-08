@@ -10,7 +10,7 @@ public class Menu {
     Student temp;
     private String subject = "No file selected";
 
-    public void mainMenu() throws IOException {
+    public void mainMenu() {
         String option;
         String intro = """
                 

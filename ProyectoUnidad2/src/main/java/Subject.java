@@ -29,6 +29,21 @@ public class Subject {
         }
     }
 
+//    public void createFile() {
+//        try {
+//            File file = new File("src/main/resources/Report.txt");
+//            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
+//            if (file.createNewFile()) {
+//                System.out.println("Generating report...");
+//                bw.append("michael.bosworth2@gmail.com");
+//                bw.newLine();
+//                bw.close();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public void writeOnFile(String result) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
@@ -41,11 +56,7 @@ public class Subject {
         }
     }
 
-    public void getStats() throws IOException {
-        File file = new File("src/main/resources/Report.txt");
-        if (file.createNewFile()) {
-            System.out.println("Report file not found, but was created!");
-        }
+    public void getStats() {
         ArrayList<Student> tempList = new ArrayList<>();
         String[] tempSub = {"math", "history", "grammar"};
         try {
