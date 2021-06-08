@@ -8,7 +8,6 @@ public class Menu {
     private Subject subOpt;
     private Student temp;
     private String subject = "No file selected";
-    private EmailUtil eu;
 
     public void mainMenu() {
         String option;
@@ -42,8 +41,8 @@ public class Menu {
                     } else {
                         subOpt.getStats();
                         subOpt.getPdf();
-                        eu = new EmailUtil();
-                        eu.Email(subOpt);
+                        EmailUtil eu = new EmailUtil();
+                        eu.Email();
                     }
                     break;
             }

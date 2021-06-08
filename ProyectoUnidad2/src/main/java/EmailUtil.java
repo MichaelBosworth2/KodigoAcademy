@@ -68,7 +68,7 @@ public class EmailUtil {
         }
     }
 
-    public void Email(Subject subject) {
+    public void Email() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Report.txt"));
             final String fromEmail = br.readLine(); //requires valid gmail id

@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Subject {
 
-    private String subject;
+    private final String subject;
 
-    public Subject(String name) {
-        this.subject = name;
+    public Subject(String subject) {
+        this.subject = subject;
     }
 
     public String getSubject() {
