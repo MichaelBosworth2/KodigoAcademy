@@ -6,8 +6,9 @@ public class Menu {
     private final Subject history = new Subject("history");
     private final Subject grammar = new Subject("grammar");
     private Subject subOpt;
-    Student temp;
+    private Student temp;
     private String subject = "No file selected";
+    private EmailUtil eu;
 
     public void mainMenu() {
         String option;
@@ -35,12 +36,14 @@ public class Menu {
                     addPrompt();
                     break;
                 case "3":
-//                    EmailUtil eu = new EmailUtil();
-//                    eu.Email(subOpt);
+
                     if (subOpt==null) {
                         System.out.println("No file has been selected yet!");
                     } else {
                         subOpt.getStats();
+                        subOpt.getPdf();
+                        eu = new EmailUtil();
+                        eu.Email(subOpt);
                     }
                     break;
             }

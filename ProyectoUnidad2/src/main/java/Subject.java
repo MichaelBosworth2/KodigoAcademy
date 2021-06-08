@@ -1,3 +1,6 @@
+import com.aspose.words.Document;
+import com.aspose.words.SaveFormat;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,20 +58,6 @@ public class Subject {
             e.printStackTrace();
         }
     }
-
-//    public void writeOnFile(Subject subject) {
-//        try {
-//            Scanner scan = new Scanner(new FileReader("src/main/resources" + subject + ".txt"));
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
-//            while (scan.hasNext()) {
-//                bw.append(scan.nextLine());
-//                bw.newLine();
-//            }
-//            bw.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void getStats() {
         createFile();
@@ -159,7 +148,6 @@ public class Subject {
         }
         System.out.println("The most popular grade is: " + popular + " and is repeated " + count + " time(s).");
         getRepeated(studentList, popular, "Popular");
-//        writeOnFile("The most popular grade is: " + popular + " and is repeated " + count + " time(s).");
     }
 
     private void getRepeated(List<Student> list, int grade, String target) {
@@ -176,6 +164,16 @@ public class Subject {
         for (String n : names) {
             System.out.println(n);
             writeOnFile(n);
+        }
+    }
+
+    public void getPdf() {
+        Document document;
+        try {
+            document = new Document("src/main/resources/Report.txt");
+            document.save("src/main/resources/Report.pdf", SaveFormat.PDF);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

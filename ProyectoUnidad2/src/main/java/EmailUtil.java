@@ -43,10 +43,18 @@ public class EmailUtil {
 
             // Second part is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "src/main/resources/Report.pdf";
+            String filename = "src/main/resources/Report.txt";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
+            multipart.addBodyPart(messageBodyPart);
+
+            // Third part is attachment
+            messageBodyPart = new MimeBodyPart();
+            String filename2 = "src/main/resources/Report.pdf";
+            DataSource source2 = new FileDataSource(filename2);
+            messageBodyPart.setDataHandler(new DataHandler(source2));
+            messageBodyPart.setFileName(filename2);
             multipart.addBodyPart(messageBodyPart);
 
             // Send the complete message parts
@@ -55,35 +63,38 @@ public class EmailUtil {
             // Send message
             Transport.send(msg);
             System.out.println("Email Sent successfully with attachment!!");
-        }catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        }catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
-    public void Email(Subject subject) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src/main/resources/math.txt"));
-        final String fromEmail = br.readLine(); //requires valid gmail id
-        final String password = "password"; // correct password for gmail id
-        final String toEmail = "emailAddress"; // can be any email id
+    public void Email(Subject subject) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/math.txt"));
+            final String fromEmail = br.readLine(); //requires valid gmail id
+            final String password = "password"; // correct password for gmail id
+            final String toEmail = "emailAddress"; // can be any email id
 
-        System.out.println("Preparing email...");
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-        props.put("mail.smtp.port", "587"); //TLS Port
-        props.put("mail.smtp.auth", "true"); //enable authentication
-        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+            System.out.println("Preparing email...");
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+            props.put("mail.smtp.port", "587"); //TLS Port
+            props.put("mail.smtp.auth", "true"); //enable authentication
+            props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
 
-        //create Authenticator object to pass in Session.getInstance argument
-        Authenticator auth = new Authenticator() {
-            //override the getPasswordAuthentication method
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, password);
-            }
-        };
-        Session session = Session.getInstance(props, auth);
+            //create Authenticator object to pass in Session.getInstance argument
+            Authenticator auth = new Authenticator() {
+                //override the getPasswordAuthentication method
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, password);
+                }
+            };
+            Session session = Session.getInstance(props, auth);
 
-        EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", "TLSEmail Testing Body");
+            EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", "TLSEmail Testing Body");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
