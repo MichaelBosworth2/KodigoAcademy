@@ -8,4 +8,3 @@ Pepe 5
 Mario 5
 Michelle 7
 Brenda 2
-Link 4
