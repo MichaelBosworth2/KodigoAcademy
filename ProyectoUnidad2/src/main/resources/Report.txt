@@ -1,0 +1,16 @@
+Min grade is 1. And it was the score of 2 students: 
+George
+Charles
+Max grade is 10. And it was the score of 1 students: 
+Marcy
+Min grade is 1. And it was the score of 2 students: 
+George
+Charles
+Max grade is 10. And it was the score of 2 students: 
+Marcy
+Marcia
+Min grade is 1. And it was the score of 2 students: 
+George
+Charles
+Max grade is 10. And it was the score of 1 students: 
+Marcy

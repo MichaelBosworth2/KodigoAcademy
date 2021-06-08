@@ -1,16 +1,16 @@
-import com.aspose.words.Document;
-
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner scan = new Scanner(System.in);
-    private Subject math = new Subject("math");
-    private Subject history = new Subject("history");
-    private Subject grammar = new Subject("grammar");
+    private final Scanner scan = new Scanner(System.in);
+    private final Subject math = new Subject("math");
+    private final Subject history = new Subject("history");
+    private final Subject grammar = new Subject("grammar");
     private Subject subOpt;
+    Student temp;
     private String subject = "No file selected";
 
-    public void mainMenu() {
+    public void mainMenu() throws IOException {
         String option;
         String intro = """
                 
@@ -36,6 +36,8 @@ public class Menu {
                     addPrompt();
                     break;
                 case "3":
+//                    EmailUtil eu = new EmailUtil();
+//                    eu.Email(subOpt);
                     if (subOpt==null) {
                         System.out.println("No file has been selected yet!");
                     } else {
@@ -59,18 +61,18 @@ public class Menu {
         switch (option) {
             case "1" -> {
                 subOpt = math;
+                subOpt.loadFile();
                 subject = math.getSubject();
-                System.out.println("math.txt has been selected");
             }
             case "2" -> {
                 subOpt = history;
+                subOpt.loadFile();
                 subject = history.getSubject();
-                System.out.println("history.txt has been selected");
             }
             case "3" -> {
                 subOpt = grammar;
+                subOpt.loadFile();
                 subject = grammar.getSubject();
-                System.out.println("grammar.txt has been selected");
             }
         }
     }
@@ -100,7 +102,8 @@ public class Menu {
                     if (subOpt==null) {
                         System.out.println("No subject has been selected yet!");
                     } else {
-                        subOpt.loadFile();
+                        temp = new Student("temp", 1);
+                        temp.addStudentFile(subOpt.getSubject());
                     }
                     break label;
             }
@@ -108,7 +111,6 @@ public class Menu {
     }
 
     private void studentPrompt(Subject subject) {
-        Student temp;
         String name;
         int grade;
 
@@ -117,6 +119,6 @@ public class Menu {
         System.out.println("Provide " + name +"'s grade");
         grade = scan.nextInt();
         temp = new Student(name, grade);
-        subject.addStudent(temp);
+        temp.addStudent(subject.getSubject());
     }
 }

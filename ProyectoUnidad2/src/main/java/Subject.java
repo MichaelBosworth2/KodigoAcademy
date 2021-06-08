@@ -16,42 +16,46 @@ public class Subject {
     }
 
     public void loadFile() {
+        String target = subject + ".txt";
+        File file = new File("src/main/resources/" + target);
         try {
-            Scanner scan = new Scanner(new FileReader("src/main/resources/studentList.txt"));
-            while (scan.hasNext()) {
-                Student tempStu = new Student(scan.next(), scan.nextInt());
-                addStudent(tempStu);
+            if (file.createNewFile()) {
+                System.out.println("File not found, but was created!");
+            } else {
+                System.out.println(target + " has been selected");
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void addStudent(Student student) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(student.getName()).append(" was successfully added to the ").append(subject).append(".txt file");
-        String file = "src/main/resources/" + subject + ".txt";
+    public void writeOnFile(String result) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-            bw.append(student.getName()).append(" ").append(String.valueOf(student.getGrade()));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
+            bw.append(result);
             bw.newLine();
             bw.close();
-            System.out.println(sb);
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred");
             e.printStackTrace();
         }
     }
 
-    public void getStats() {
+    public void getStats() throws IOException {
+        File file = new File("src/main/resources/Report.txt");
+        if (file.createNewFile()) {
+            System.out.println("Report file not found, but was created!");
+        }
         ArrayList<Student> tempList = new ArrayList<>();
-        String[] tempSub = {"MATH", "HISTORY", "GRAMMAR"};
+        String[] tempSub = {"math", "history", "grammar"};
         try {
             for (String sub : tempSub) {
-                Scanner scan = new Scanner(new FileReader(sub + ".txt"));
+                Scanner scan = new Scanner(new FileReader("src/main/resources/" + sub + ".txt"));
                 while (scan.hasNext()) {
-                    Student tempStu = new Student(scan.next(), scan.nextInt());
-                    tempList.add(tempStu);
+                    if (!scan.nextLine().contains("@gmail.com")) {
+                        Student tempStu = new Student(scan.next(), scan.nextInt());
+                        tempList.add(tempStu);
+                    }
                 }
                 System.out.println("===============================");
                 System.out.println(sub + " statistics:".toUpperCase());
@@ -59,6 +63,7 @@ public class Subject {
                 getMax(tempList);
                 getAvg(tempList);
 //                getPopular(tempList);
+
                 tempList.clear();
             }
         } catch (FileNotFoundException e) {
@@ -101,14 +106,18 @@ public class Subject {
 
     private void getRepeated(List<Student> list, int grade, String target) {
         ArrayList<String> names = new ArrayList<>();
+        String message;
         for (Student n : list) {
             if (n.getGrade() == grade) {
                 names.add(n.getName());
             }
         }
-        System.out.println(target + " grade is " + grade + ". And it was the score of " + names.size() + " students: ");
+        message = target + " grade is " + grade + ". And it was the score of " + names.size() + " students: ";
+        System.out.println(message);
+        writeOnFile(message);
         for (String n : names) {
             System.out.println(n);
+            writeOnFile(n);
         }
     }
 
