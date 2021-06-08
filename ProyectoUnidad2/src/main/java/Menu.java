@@ -120,7 +120,11 @@ public class Menu {
         name = scan.next();
         System.out.println("Provide " + name +"'s grade");
         grade = scan.nextInt();
-        temp = new Student(name, grade);
-        temp.addStudent(subject.getSubject());
+        if (!(grade < 0 || grade > 10)) {
+            temp = new Student(name, grade);
+            temp.addStudent(subject.getSubject());
+        } else {
+            System.out.println("Grade must be between 0 and 10, please try again.");
+        }
     }
 }
