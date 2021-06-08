@@ -29,20 +29,20 @@ public class Subject {
         }
     }
 
-//    public void createFile() {
-//        try {
-//            File file = new File("src/main/resources/Report.txt");
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
-//            if (file.createNewFile()) {
-//                System.out.println("Generating report...");
-//                bw.append("michael.bosworth2@gmail.com");
-//                bw.newLine();
-//                bw.close();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void createFile() {
+        try {
+            File file = new File("src/main/resources/Report.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
+            if (file.createNewFile()) {
+                System.out.println("Generating report...");
+            }
+            bw.append("michael.bosworth2@gmail.com");
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void writeOnFile(String result) {
         try {
@@ -56,28 +56,48 @@ public class Subject {
         }
     }
 
+//    public void writeOnFile(Subject subject) {
+//        try {
+//            Scanner scan = new Scanner(new FileReader("src/main/resources" + subject + ".txt"));
+//            BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt"));
+//            while (scan.hasNext()) {
+//                bw.append(scan.nextLine());
+//                bw.newLine();
+//            }
+//            bw.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public void getStats() {
+        createFile();
         ArrayList<Student> tempList = new ArrayList<>();
-        String[] tempSub = {"math", "history", "grammar"};
+        String[] tempSub = {"MATH", "HISTORY", "GRAMMAR"};
         try {
             for (String sub : tempSub) {
                 Scanner scan = new Scanner(new FileReader("src/main/resources/" + sub + ".txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/Report.txt", true));
+                bw.newLine();
+                bw.append(sub).append(" STATISTICS");
+                bw.newLine();
                 while (scan.hasNext()) {
-                    if (!scan.nextLine().contains("@gmail.com")) {
-                        Student tempStu = new Student(scan.next(), scan.nextInt());
-                        tempList.add(tempStu);
-                    }
+                    Student tempStu = new Student(scan.next(), scan.nextInt());
+                    bw.append(tempStu.getName()).append(" ").append(String.valueOf(tempStu.getGrade()));
+                    bw.newLine();
+                    tempList.add(tempStu);
                 }
-                System.out.println("===============================");
-                System.out.println(sub + " statistics:".toUpperCase());
+                bw.append("===================================");
+                bw.newLine();
+                bw.close();
                 getMin(tempList);
                 getMax(tempList);
                 getAvg(tempList);
-//                getPopular(tempList);
+                getPopular(tempList);
 
                 tempList.clear();
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -106,13 +126,40 @@ public class Subject {
         double gradeSum = 0.0;
         double gradeAvg;
         int count = 0;
+        String message;
 
         for (Student student : studentList) {
             gradeSum = gradeSum + student.getGrade();
             count++;
         }
         gradeAvg = gradeSum / count;
-        System.out.println("Average grade is: " + gradeAvg);
+        message = "Average grade is: " + gradeAvg;
+        System.out.println(message);
+        writeOnFile(message);
+    }
+
+    private void getPopular(List<Student> studentList) {
+        int count = 0;
+        int tempCount;
+        int popular = studentList.get(0).getGrade();
+        int temp;
+
+        for (int i = 0; i < studentList.size(); i++) {
+            temp = studentList.get(i).getGrade();
+            tempCount = 0;
+            for (Student n : studentList) {
+                if (temp == n.getGrade()) {
+                    tempCount++;
+                }
+                if (tempCount > count) {
+                    popular = temp;
+                    count = tempCount;
+                }
+            }
+        }
+        System.out.println("The most popular grade is: " + popular + " and is repeated " + count + " time(s).");
+        getRepeated(studentList, popular, "Popular");
+//        writeOnFile("The most popular grade is: " + popular + " and is repeated " + count + " time(s).");
     }
 
     private void getRepeated(List<Student> list, int grade, String target) {
