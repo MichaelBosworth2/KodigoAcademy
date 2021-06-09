@@ -34,7 +34,7 @@ public class Student {
         try {
             Scanner scan = new Scanner(new FileReader("src/main/resources/studentList.txt"));
             while (scan.hasNext()) {
-                student = new Student(scan.next(), scan.nextInt());
+                student = new Student(scan.next(), scan.nextDouble());
                 student.addStudent(subject);
             }
         } catch (FileNotFoundException e) {

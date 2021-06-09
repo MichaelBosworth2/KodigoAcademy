@@ -1,10 +1,12 @@
-Mike 10
-George 1
+Mike 7.4
+George 1.3
 Marcy 10
 Rose 5
 Charles 1
-Carlos 8
-Pepe 5
+Carlos 8.6
+Pepe 5.7
 Mario 5
 Michelle 7
-Brenda 2
+Brenda 1
+Roxie 10
+Ozzie 2.8

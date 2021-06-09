@@ -37,7 +37,7 @@ public class Subject {
             if (file.createNewFile()) {
                 System.out.println("Generating report...");
             }
-            bw.append("michael.bosworth2@gmail.com");
+            bw.append("yourEmailAddress");
             bw.newLine();
             bw.close();
         } catch (IOException e) {

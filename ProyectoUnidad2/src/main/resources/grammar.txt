@@ -7,4 +7,6 @@ Carlos 8
 Pepe 5
 Mario 5
 Michelle 7
-Brenda 2
+Brenda 1.0
+Roxie 10.0
+Ozzie 2.8
